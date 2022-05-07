@@ -1,17 +1,17 @@
 #!/bin/bash
 if [ $# -eq 0 ]; then
     touch index.html index.js index.css
-    echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <script src="index.js"></script>\n</head>\n<body>\n</body>\n</html>' > index.html  
+            echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <script src="index.js"></script>\n<link rel="stylesheet" href="index.css">\n </head>\n    <body>\n\n    </body>\n</html>' > index.html  
     echo "ficheros creados con exito"
     exit 0
 fi
 if [ $# -eq 1 -a $1 == "help" ]; then
     echo "-------- Adrián Rojas ---------"
-    echo "$0 por defecto crea una plantilla con los 3 ficheros mas importantes para web, ademas de plantilla en html"
-    echo "uso de $0 comando nombre html | nombre js | nombre css"
-    echo "$0 -rm borra toda las plantillas creadas !!precaución"
-    echo "$0 -mkw crea la plantilla dentro de una carpeta llamada WW"
-    echo "$0 -mkw se le pueden pasar 3 paramatros mas para perzonalizar el nombre de los ficheros"
+    echo "wstart por defecto crea una plantilla con los 3 ficheros mas importantes para web, ademas de plantilla en html"
+    echo "uso de wstart comando nombre html | nombre js | nombre css"
+    echo "wstart -rm borra toda las plantillas creadas !!precaución borra todo html css y js en la carpeta"
+    echo "wstart -mkw crea la plantilla dentro de una carpeta llamada WW"
+    echo "wstart -mkw se le pueden pasar 3 paramatros mas para perzonalizar el nombre de los ficheros"
     echo "-------------------------------"
     exit 0
 
@@ -26,7 +26,7 @@ if [ $# -eq 1 -a $1 == "help" ]; then
         cd WW
         sleep 2
         touch index.html index.js index.css
-        echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <script src="index.js"></script>\n</head>\n<body>\n</body>\n</html>' > index.html  
+        echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <script src="index.js"></script>\n<link rel="stylesheet" href="index.css">\n </head>\n    <body>\n\n    </body>\n</html>' > index.html  
         echo "ficheros creados con exito"
         exit 0
 
@@ -45,14 +45,18 @@ if [[ $# -eq 3 ]];then
     name1=$1.html
     name2=$2.js
     name3=$3.css
-
-    touch $name1 $name2 $name3
-    echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>' > $name1
-    echo -n '<script src="' >> $name1
-    echo -n $name2 >> $name1
-    echo -ne '"></script>\n</head>\n<body>\n</body>\n</html>' >> $name1
-    echo "ficheros creados con exito"
-    exit 0
+    crear_html(){
+        touch $name1 $name2 $name3
+        echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>' > $name1
+        echo -n '<script src="' >> $name1
+        echo -n $name2 >> $name1
+        echo -ne '"></script>\n<link rel="stylesheet" href="' >> $name1
+        echo -n $name3 >> $name1
+        echo -ne '">\n</head>\n    <body>\n\n    </body>\n</html>' >> $name1
+        echo "ficheros creados con exito"
+        exit 0
+    }
+    crear_html
 fi
 
 if [ $# -eq 4 -a $1 == "-mkw" ];then
@@ -67,11 +71,5 @@ if [ $# -eq 4 -a $1 == "-mkw" ];then
     name2=$3.js
     name3=$4.css
 
-    touch $name1 $name2 $name3
-    echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>' > $name1
-    echo -n '<script src="' >> $name1
-    echo -n $name2 >> $name1
-    echo -ne '"></script>\n</head>\n<body>\n</body>\n</html>' >> $name1
-
-    exit 0
+    crear_html 
 fi
