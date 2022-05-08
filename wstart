@@ -1,4 +1,16 @@
 #!/bin/bash
+crear_html(){
+    touch $name1 $name2 $name3
+    echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>' > $name1
+    echo -n '<script src="' >> $name1
+    echo -n $name2 >> $name1
+    echo -ne '"></script>\n<link rel="stylesheet" href="' >> $name1
+    echo -n $name3 >> $name1
+    echo -ne '">\n</head>\n    <body>\n\n    </body>\n</html>' >> $name1
+    echo "ficheros creados con exito"
+    exit 0
+}
+
 if [ $# -eq 0 ]; then
     touch index.html index.js index.css
             echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>\n    <script src="index.js"></script>\n<link rel="stylesheet" href="index.css">\n </head>\n    <body>\n\n    </body>\n</html>' > index.html  
@@ -45,17 +57,6 @@ if [[ $# -eq 3 ]];then
     name1=$1.html
     name2=$2.js
     name3=$3.css
-    crear_html(){
-        touch $name1 $name2 $name3
-        echo -e '<!DOCTYPE html> \n <html lang="en"> \n <head>\n    <meta charset="UTF-8">\n    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Document</title>' > $name1
-        echo -n '<script src="' >> $name1
-        echo -n $name2 >> $name1
-        echo -ne '"></script>\n<link rel="stylesheet" href="' >> $name1
-        echo -n $name3 >> $name1
-        echo -ne '">\n</head>\n    <body>\n\n    </body>\n</html>' >> $name1
-        echo "ficheros creados con exito"
-        exit 0
-    }
     crear_html
 fi
 
@@ -71,5 +72,5 @@ if [ $# -eq 4 -a $1 == "-mkw" ];then
     name2=$3.js
     name3=$4.css
 
-    crear_html 
+    crear_html
 fi
